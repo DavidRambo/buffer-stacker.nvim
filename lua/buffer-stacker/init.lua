@@ -126,17 +126,16 @@ function M.list()
 		return
 	end
 
-	print("Bufstack (Current -> Prev -> ... -> Next)")
-	local ptr = current_bufnr
-	local count = -1 -- Safeguard against infinite loop.
-	repeat
-		local marker = (ptr == current_bufnr) and " (Current)" or ""
-		local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(ptr), ":.")
-		print(string.format("  %d - %s%s", ptr, name, marker))
+	local ptr_bufnr = links[current_bufnr].prev
+	while ptr_bufnr ~= current_bufnr do
+		local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(ptr_bufnr), ":.")
+		print(string.format("  %d - %s", ptr_bufnr, name))
 
-		ptr = links[ptr].prev
-		count = count + 1
-	until ptr == current_bufnr or count > #links
+		ptr_bufnr = links[ptr_bufnr].prev
+	end
+
+	local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(ptr_bufnr), ":.")
+	print(string.format("  %d - %s (Current)", ptr_bufnr, name))
 end
 
 function M.remove(bufnr)
