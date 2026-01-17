@@ -1,4 +1,5 @@
 local bufstacker = require("buffer-stacker")
+local telescope = require("buffer-stacker.telescope")
 
 local augroup = vim.api.nvim_create_augroup("Bufstack", { clear = true })
 
@@ -35,3 +36,7 @@ end, { desc = "Go to previous buffer in the buffer stack" })
 vim.api.nvim_create_user_command("BufstackerLs", function()
 	bufstacker.list()
 end, { desc = "List buffers in the stack" })
+
+vim.api.nvim_create_user_command("BufstackerTelescope", function()
+	telescope.bufpicker()
+end, { desc = "Telescope buffer picker in buffer-stacker's MRU order" })

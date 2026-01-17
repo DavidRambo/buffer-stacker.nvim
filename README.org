@@ -12,11 +12,22 @@
    With [[https://github.com/folke/lazy.nvim][lazy.nvim]]:
    #+begin_src lua
    return {
-       "davidrambo/buffer-stacker.nvim"
+       "davidrambo/buffer-stacker.nvim",
+       dependencies = {
+           "nvim-telescope/telescope.nvim", -- optional: for the telescope picker
+       },
        config = function()
            vim.keymap.set('n', '<leader>bn', '<cmd>BufstackerNext<cr>', { desc = 'Next stacked buffer' })
            vim.keymap.set('n', '<leader>bp', '<cmd>BufstackerPrev<cr>', { desc = 'Previous stacked buffer' })
            vim.keymap.set('n', '<leader>bl', '<cmd>BufstackerLs<cr>', { desc = 'List stacked buffers' })
+           -- If using the telescope picker
+      vim.keymap.set("n", "<leader>bb", function()
+        require("buffer-stacker.telescope").bufpicker({
+          theme = "ivy",
+          ignore_current_buffer = false,
+          sort_by_path = false,
+        })
+      end, { desc = "Pick stacked buffer" })
        end
    }
    #+end_src
@@ -28,6 +39,12 @@
    Note that you do not need to navigate the buffers using the provided commands, as an autocommand for ~BufEnter~ updates the stack.
    Likewise, there is no provided command for killing a buffer.
    Instead, an autocommand for ~BufDelete~ updates the stack when a buffer is deleted.
+
+*** Telescope Picker
+    The telescope picker has three options:
+    - ~theme~: ivy, dropdown, cursor
+    - ~ignore_current_buffer~: set to true if you don't want the current buffer to be included at the bottom of the list
+    - ~sort_by_path~: set to true if you want to fuzzy search the entire path name, false for only the filename
 
 ** Similar Projects
    There are several plugins that have the same motivation, and they all seem to do it a bit differently.

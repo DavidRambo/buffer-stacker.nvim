@@ -152,4 +152,24 @@ function M.remove(bufnr)
 	links[bufnr] = nil
 end
 
+---Returns a table of buffer numbers ordered from the current buffer's prev through next, ending with current.
+function M.flatten_links()
+	if not current_bufnr or not links[current_bufnr] then
+		return {}
+	end
+
+	local list = {}
+	local ptr_bufnr = current_bufnr
+
+	repeat
+		if not links[ptr_bufnr] then
+			break
+		end
+		ptr_bufnr = links[ptr_bufnr].prev
+		table.insert(list, ptr_bufnr)
+	until ptr_bufnr == current_bufnr
+
+	return list
+end
+
 return M
