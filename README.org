@@ -1,8 +1,8 @@
 * Buffer Stacker
   A neovim plugin that keeps buffers arranged in the order they're visited.
   It provides commands to navigate to the next and previous buffers in this order.
-  At the moment, there is a command to print a list of the buffers, much like ~:ls~.
-  In the future, I'd like to integrate [[https://github.com/nvim-telescope/telescope.nvim][telescope]] to list and pick buffers from the stack.
+  There is a command to print a list of the buffers, much like ~:ls~.
+  Finally, there is a telescope picker.
 
 ** Rationale
    Having used [[https://github.com/doomemacs/doomemacs][doom emacs]] for many years for writing, I became used to expecting the previously entered buffer to be navigable as the previous buffer via ~:bp~.
