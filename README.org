@@ -34,8 +34,9 @@
    #+end_src
 
 ** Usage
-   The provided installation snippet sets keymaps for all three commands: ~BufstackNext~, ~BufstackPrev~, and ~BufstackLs~.
+   The provided installation snippet sets keymaps for all three commands plus the picker: ~BufstackerNext~, ~BufstackerPrev~, and ~BufstackerLs~.
    Open and close files as before and enjoy the intuitive ordering of buffers as you visit them.
+   While a command for the picker is exposed, ~BufstackerTelescope~, the installation script calls it directly in order to pass config options.
 
    Note that you do not need to navigate the buffers using the provided commands, as an autocommand for ~BufEnter~ updates the stack.
    Likewise, there is no provided command for killing a buffer.
